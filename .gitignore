@@ -1,0 +1,9 @@
+# Ignore MySQL socket files
+mysql/mysql.sock
+
+# Ignore all log files
+*.log
+
+# Ignore temporary files
+*.tmp
+

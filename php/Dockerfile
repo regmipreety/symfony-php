@@ -8,7 +8,8 @@ RUN apt-get update && apt-get upgrade -y \
        libicu-dev \
        zip \
        libzip-dev \
-    && docker-php-ext-install intl opcache pdo pdo_mysql \
+       php8.2-pgsql \
+    && docker-php-ext-install intl opcache pdo mysqli pdo_mysql \
     && pecl install apcu \
     && docker-php-ext-enable apcu \
     && docker-php-ext-configure zip \

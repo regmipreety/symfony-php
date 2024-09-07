@@ -7,3 +7,5 @@
 <h4>To rebuild Docker containers</h4>
 * docker-compose down
 * docker-compose up --build
+<p>To check logs of a specific container: <b>docker-compose logs database(container_name)
+</b></p>

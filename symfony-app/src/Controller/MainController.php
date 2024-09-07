@@ -10,15 +10,6 @@ class MainController extends AbstractController
 {
     public function index(): Response
     {
-        $tag = date("l");
-        $user = [
-            'name'=> 'udemy',
-            'role'=>'dev',
-        ];
-        return $this->render('main/index.html.twig', [
-            'd' => $tag,
-            'user'=> $user
-            
-        ]);
+       return $this->render('main/index.html.twig');
     }
 }

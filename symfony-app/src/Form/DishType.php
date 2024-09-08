@@ -15,7 +15,7 @@ class DishType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('image', FileType::class)
+            ->add('image', FileType::class, array('label' => 'Attachment'))
             ->add('description')
             ->add('price')
             ->add('save', SubmitType::class)

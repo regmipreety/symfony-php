@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class DishController extends AbstractController
 {
-    
+
     private $doctrine;
 
 
@@ -29,21 +29,52 @@ class DishController extends AbstractController
         ]);
     }
 
-    public function create(Request $request){
+    public function create(Request $request)
+    {
         $dish = new Dish();
         $form = $this->createForm(DishType::class, $dish);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             //EntityManager
             $em = $this->doctrine->getManager();
+            $image = $form->get('image')->getData();
+            if ($image) {
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = $originalFilename . '-' . uniqid() . '.' . $image->guessExtension();
+                $filename = md5(uniqid()) . '.' . $image->getClientOriginalExtension();
+            }
+            try {
+                $image->move(
+                    $this->getParameter('images'),
+                    $filename
+                );
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'Image file could not be uploaded.');
+
+                return $this->redirect($this->generateUrl('dish'));
+            }
+
+            $dish->setImage($filename);
             $em->persist($dish);
             $em->flush();
+            $this->addFlash('success', 'Dish added successfully.');
+
             return $this->redirect($this->generateUrl('dish'));
         }
-       
-       return $this->render('dish/create.html.twig', [
-        'create'=> $form->createView(),
-       ]);
-        
+
+        return $this->render('dish/create.html.twig', [
+            'create' => $form->createView(),
+        ]);
+
+    }
+
+    public function delete($id, DishRepository $dr)
+    {
+        $em = $this->doctrine->getManager();
+        $dish = $dr->find($id);
+        $em->remove($dish);
+        $em->flush();
+        $this->addFlash('success', 'Dish deleted successfully.');
+        return $this->redirect($this->generateUrl('dish'));
     }
 }

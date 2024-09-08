@@ -24,7 +24,12 @@ article_delete:
 dish:
     path: /dish
     controller: App\Controller\DishController::index
-dish_create:
+dish.create:
     path: /dish/create
     controller: App\Controller\DishController::create
+dish.delete:
+    path: /dish/delete/{id}
+    controller: App\Controller\DishController::delete
+    requirements:
+        id: \d+
 

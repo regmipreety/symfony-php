@@ -4,6 +4,11 @@
 
 {% block body %}
 <div class= "container">
+{% for message in app.flashes('success') %}
+  <div class = "alert alert-success">
+  <h3>{{ message }} </h3>
+  </div>
+{% endfor %}
 <br>
   <h2>Dishes</h2><br>
   <table class="table">
@@ -12,6 +17,12 @@
         <th scope="col">#</th>
         <th scope="col">Dish Name</th>
         <th scope="col">Description</th>     
+        <th scope="col">Price</th>     
+        <th scope="col">Delete</th>     
+        <th scope="col"><a href="{{path('dish.create')}}">Create</a></th>     
+
+
+
       </tr>
     </thead>
     <tbody>    
@@ -20,6 +31,10 @@
               <td>{{dish.id}}</td>
               <td>{{dish.name}}</td>
               <td>{{dish.description}}</td>
+              <td>{{dish.price}}</td>
+              <td><a href="{{path('dish.delete', {id: dish.id})}}">x</a></td>
+              <td></td>
+
           </tr>
         {% endfor %}        
     </tbody>

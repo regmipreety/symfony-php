@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Our Menu{% endblock %}
+
+{% block body %}
+<div class= "container">
+<br>
+<h2>View Details</h2><br>
+ <h3>{{dish.name}}</h3>
+ <img src="{{asset('images_dish/'~ dish.image)}}">
+</div>
+{% endblock %}

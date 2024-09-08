@@ -67,6 +67,15 @@ class DishController extends AbstractController
         ]);
 
     }
+    /**
+    * @Entity("dish", expr="repository.find(id)")
+    */
+    public function show(Dish $dish){
+        return $this->render('dish/show.html.twig', [
+            'dish' => $dish,
+        ]);
+
+    }
 
     public function delete($id, DishRepository $dr)
     {

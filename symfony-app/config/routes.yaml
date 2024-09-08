@@ -27,6 +27,11 @@ dish:
 dish.create:
     path: /dish/create
     controller: App\Controller\DishController::create
+dish.show:
+    path: /dish/show/{id}
+    controller: App\Controller\DishController::show
+    requirements:
+        id: \d+
 dish.delete:
     path: /dish/delete/{id}
     controller: App\Controller\DishController::delete

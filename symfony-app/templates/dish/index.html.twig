@@ -9,6 +9,12 @@
   <h3>{{ message }} </h3>
   </div>
 {% endfor %}
+
+{% for message in app.flashes('error') %}
+  <div class = "alert alert-danger">
+  <h3>{{ message }} </h3>
+  </div>
+{% endfor %}
 <br>
   <h2>Dishes</h2><br>
   <table class="table">
@@ -26,10 +32,12 @@
 
       </tr>
     </thead>
-    <tbody>    
+    <tbody> 
+        {% set count = 0 %}   
         {% for dish in dishes %}
           <tr>
-              <td>{{dish.id}}</td>
+              {% set count = count + 1 %}
+              <td>{{ count }}</td>
               <td><a href="{{path('dish.show', {id: dish.id})}}">{{dish.name}}</a></td>
               <td>{{dish.description}}</td>
               <td>{{dish.category}}</td>

@@ -35,3 +35,21 @@ dish.delete:
 menu:
     path: /menu
     controller: App\Controller\MenuController::menu
+order:
+    path: /order
+    controller: App\Controller\OrderController::index
+create_order:
+    path: /order/{id}
+    controller: App\Controller\OrderController::order
+    requirements:
+        id: \d+
+status:
+    path: /status/{id},{status}
+    controller: App\Controller\OrderController::status
+    requirements:
+        id: \d+
+order.delete:
+    path: /order/delete/{id}
+    controller: App\Controller\OrderController::delete
+    requirements:
+        id: \d+

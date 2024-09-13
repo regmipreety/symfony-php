@@ -5,6 +5,17 @@
 {% block body %}
 <section class="playlist-section spad">
 		<div class="container-fluid">
+            {% for message in app.flashes('success') %}
+            <div class = "alert alert-success">
+            <h3>{{ message }} </h3>
+            </div>
+            {% endfor %}
+
+            {% for message in app.flashes('error') %}
+            <div class = "alert alert-danger">
+            <h3>{{ message }} </h3>
+            </div>
+            {% endfor %}
 			<div class="section-title">
 				<h2>Menu Cart</h2>
 			</div>
@@ -27,6 +38,7 @@
 						<h5>{{ dish.name }} - EUR {{ dish.price }}</h5>
                         <p>Order # {{dish.id}}</p>
                         <p> {{dish.category}}</p>
+                        <a class="btn btn-outline-danger btn-sm" href="{{path('create_order', {id: dish.id})}}">Add to Order</a>
 					</div>
 				</div>				
 			{% endfor %}	

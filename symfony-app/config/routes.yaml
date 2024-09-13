@@ -32,3 +32,6 @@ dish.delete:
     controller: App\Controller\DishController::delete
     requirements:
         id: \d+
+menu:
+    path: /menu
+    controller: App\Controller\MenuController::menu

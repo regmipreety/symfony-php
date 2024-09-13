@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hungry? Grab a bite!{% endblock %}
+
+{% block body %}
+<section class="playlist-section spad">
+		<div class="container-fluid">
+			<div class="section-title">
+				<h2>Menu Cart</h2>
+			</div>
+			<div class="container">            
+				<ul class="playlist-filter controls">
+                {% for cat in categories%}
+					<li class="control" data-filter=".{{cat.name}}">{{cat.name}}</li>
+					
+				 {% endfor %}
+                 <li class="control" data-filter="all">All Dishes</li>
+                </ul>
+			</div>                                              
+			<div class="clearfix"></div>
+			<div class="row playlist-area">
+            
+            {% for dish in dishes %}          
+				<div class="mix col-lg-3 col-md-4 col-sm-6 {{dish.category}}">
+					<div class="playlist-item">
+						<img src="{{asset('images_dish/'~ dish.image)}}" alt="">
+						<h5>{{ dish.name }} - EUR {{ dish.price }}</h5>
+                        <p>Order # {{dish.id}}</p>
+                        <p> {{dish.category}}</p>
+					</div>
+				</div>				
+			{% endfor %}	
+			</div>
+		</div>
+	</section>
+	<!-- Menu section end -->
+{% endblock %}

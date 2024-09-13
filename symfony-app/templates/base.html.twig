@@ -46,11 +46,11 @@
 		</div>
 		<ul class="main-menu">
 			<li><a href="{{path('main')}}">Welcome</a></li>
-			<li><a href="#">About</a></li>
+			<li><a href="{{path('menu')}}">Menu</a></li>
 			{% if is_granted('IS_AUTHENTICATED_FULLY')%}
 			<li><a href="#">Pages</a>
 				<ul class="sub-menu">
-					<li><a href="{{path('dish.index')}}">Menu</a></li>
+					<li><a href="{{path('dish.index')}}">Dishes</a></li>
 					<li><a href="{{path('dish.create')}}">Create</a></li>
 					<li><a href="artist.html">Artist</a></li>
 					<li><a href="{{path('app_registration')}}">Register</a></li>

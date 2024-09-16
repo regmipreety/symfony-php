@@ -1,40 +1,58 @@
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+app_logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout
+app_registration:
+    path: /register
+    controller: App\Controller\RegistrationController::register
 main:
     path: /
     controller: App\Controller\MainController::index
-
-article_index:
-    path: /article
-    controller: App\Controller\ArticleController::index
-article_fetchall:
-    path: /article/show
-    controller: App\Controller\ArticleController::show_all
-
-article_show:
-    path: /article/{id}
-    controller: App\Controller\ArticleController::show
-    requirements:
-        id: \d+
-
-article_delete:
-    path: /article/delete/{id}
-    controller: App\Controller\ArticleController::delete
-    requirements:
-        id: \d+
-
-dish:
+dish.index:
     path: /dish
     controller: App\Controller\DishController::index
+    methods: GET
+
 dish.create:
     path: /dish/create
     controller: App\Controller\DishController::create
+    methods: [GET, POST]
+
 dish.show:
     path: /dish/show/{id}
     controller: App\Controller\DishController::show
+    methods: GET
     requirements:
         id: \d+
+
 dish.delete:
     path: /dish/delete/{id}
     controller: App\Controller\DishController::delete
     requirements:
         id: \d+
-
+menu:
+    path: /menu
+    controller: App\Controller\MenuController::menu
+order:
+    path: /order
+    controller: App\Controller\OrderController::index
+create_order:
+    path: /order/{id}
+    controller: App\Controller\OrderController::order
+    requirements:
+        id: \d+
+status:
+    path: /status/{id},{status}
+    controller: App\Controller\OrderController::status
+    requirements:
+        id: \d+
+order.delete:
+    path: /order/delete/{id}
+    controller: App\Controller\OrderController::delete
+    requirements:
+        id: \d+
+app_mailer: 
+    path: /mailer
+    controller: App\Controller\MailerController::sendEmail

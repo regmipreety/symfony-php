@@ -35,27 +35,29 @@
 			<img src="{{asset('img/logo.png')}}" alt="">
 		</a>
 		<div class="header-right">
-			<a href="#" class="hr-btn">Help</a>
-			<span>|</span>
 			<div class="user-panel">
-				<a href="" class="login">Login</a>
-				<a href="" class="register">Create an account</a>
+			{% if not is_granted('IS_AUTHENTICATED_FULLY')%}
+				<a href="{{path('app_login')}}" class="login">Login</a>
+			{% endif %}
+			{% if is_granted('IS_AUTHENTICATED_FULLY')%}
+				<a href="{{path('app_logout')}}" class="register">Logout</a>
+			{% endif %}
 			</div> 
 		</div>
 		<ul class="main-menu">
 			<li><a href="{{path('main')}}">Welcome</a></li>
-			<li><a href="#">About</a></li>
+			<li><a href="{{path('menu')}}">Menu</a></li>
+			<li><a href="{{path('order')}}">Order</a></li>
+			{% if is_granted('IS_AUTHENTICATED_FULLY')%}
 			<li><a href="#">Pages</a>
 				<ul class="sub-menu">
-					<li><a href="{{path('dish')}}">Menu</a></li>
-					<li><a href="playlist.html">Playlist</a></li>
+					<li><a href="{{path('dish.index')}}">Dishes</a></li>
+					<li><a href="{{path('dish.create')}}">Create</a></li>
 					<li><a href="artist.html">Artist</a></li>
-					<li><a href="blog.html">Blog</a></li>
-					<li><a href="contact.html">Contact</a></li>
+					<li><a href="{{path('app_registration')}}">Register</a></li>
 				</ul>
 			</li>
-			<li><a href="blog.html">News</a></li>
-			<li><a href="contact.html">Contact</a></li>
+			{% endif %}
 		</ul>
 	</header>
 	<!-- Header section end -->
@@ -207,13 +209,6 @@
 					<div class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
-					<div class="social-links">
-						<a href=""><i class="fa fa-instagram"></i></a>
-						<a href=""><i class="fa fa-pinterest"></i></a>
-						<a href=""><i class="fa fa-facebook"></i></a>
-						<a href=""><i class="fa fa-twitter"></i></a>
-						<a href=""><i class="fa fa-youtube"></i></a>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -222,6 +217,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	
 	<!--====== Javascripts & Jquery ======-->
 	<script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="{{asset('js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('js/jquery.slicknav.min.js')}}"></script>
 	<script src="{{asset('js/owl.carousel.min.js')}}"></script>

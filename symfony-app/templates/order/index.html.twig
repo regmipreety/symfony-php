@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}View Total{% endblock %}
+
+{% block body %}
+<br>
+<div class = "container">
+<h2>Your Order</h2>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th> 
+        <th scope="col">Price</th>     
+        <th scope="col">Status</th>     
+      </tr>
+    </thead>
+    <tbody> 
+        {% set count = 0 %} 
+        {% set sum = 0 %}   
+        {% for order in orders %}
+        {% set sum = sum + order.price %}
+          <tr>
+              {% set count = count + 1 %}
+              <td>{{ count }}</td>
+              <td>{{order.name}}</td>
+              <td>{{order.price}}</td>
+              <td>{{order.status}}</td>
+              {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+              <td>
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                        {{order.status}}
+                    </a>
+                    <ul class="dropdown-menu">    
+                        <li><a class="dropdown-item" href="{{path('status', {id: order.id, status: 'open'})}}">Open</a></li>
+                        <li><a class="dropdown-item" href="{{path('status', {id: order.id, status: 'ready'})}}">Ready</a></li>
+                        <li><a class="dropdown-item" href="{{path('status', {id: order.id, status: 'pending'})}}">Pending</a></li>     
+                    </ul>
+                </div>
+              </td>
+              {% endif %}
+              {% if order.status == 'open' %}
+              <td>
+                <a class = "btn btn-outline-danger btn-sm" href="{{path('order.delete', {id: order.id})}}" role="button" >remove</a>
+              </td>
+              {% endif %}
+          </tr>
+           
+        {% endfor %} 
+        <td></td><td><strong>Total: </strong></td>
+              <td><strong>{{sum}} EUR </strong></td>
+              <td></td> <td></td>      
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -25,6 +25,9 @@ class Dish
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy:"dish")]
+    private $category;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Dish
     public function setImage(?string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }

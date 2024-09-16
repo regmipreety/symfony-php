@@ -51,15 +51,15 @@ class DishController extends AbstractController
             } catch (\Exception $e) {
                 $this->addFlash('error', 'Image file could not be uploaded.');
 
-                return $this->redirect($this->generateUrl('dish'));
+                return $this->redirect($this->generateUrl('dish.index'));
             }
 
             $dish->setImage($filename);
             $em->persist($dish);
             $em->flush();
-            $this->addFlash('success', 'Dish added successfully.');
+            $this->addFlash('success', 'Dish '.$dish->getName().' added successfully.');
 
-            return $this->redirect($this->generateUrl('dish'));
+            return $this->redirect($this->generateUrl('dish.index'));
         }
 
         return $this->render('dish/create.html.twig', [
@@ -68,9 +68,10 @@ class DishController extends AbstractController
 
     }
     /**
-    * @Entity("dish", expr="repository.find(id)")
-    */
-    public function show(Dish $dish){
+     * @Entity("dish", expr="repository.find(id)")
+     */
+    public function show(Dish $dish)
+    {
         return $this->render('dish/show.html.twig', [
             'dish' => $dish,
         ]);
@@ -81,9 +82,16 @@ class DishController extends AbstractController
     {
         $em = $this->doctrine->getManager();
         $dish = $dr->find($id);
-        $em->remove($dish);
-        $em->flush();
-        $this->addFlash('success', 'Dish deleted successfully.');
-        return $this->redirect($this->generateUrl('dish'));
+        try {        
+            $em->remove($dish);
+            $em->flush();
+            $this->addFlash('success', 'Dish '.$dish->getName().' deleted successfully.');
+            return $this->redirect($this->generateUrl('dish.index'));
+        } catch (\Exception $e) {
+            $this->addFlash('error', 'Dish could not be deleted.');
+
+            return $this->redirect($this->generateUrl('dish.index'));
+        }
+
     }
 }

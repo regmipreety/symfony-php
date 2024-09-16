@@ -7,3 +7,7 @@ mysql/mysql.sock
 # Ignore temporary files
 *.tmp
 
+# Ignore env files
+.env
+
+

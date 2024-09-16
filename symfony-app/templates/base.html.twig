@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-	<title>SolMusic | HTML Template</title>
+	<title>Menu Carte | GrubHub</title>
 	<meta charset="UTF-8">
 	<meta name="description" content="SolMusic HTML Template">
 	<meta name="keywords" content="music, html">
@@ -48,6 +48,8 @@
 			<li><a href="{{path('main')}}">Welcome</a></li>
 			<li><a href="{{path('menu')}}">Menu</a></li>
 			<li><a href="{{path('order')}}">Order</a></li>
+			<li><a href="{{path('app_mailer')}}">Waiter</a></li>
+
 			{% if is_granted('IS_AUTHENTICATED_FULLY')%}
 			<li><a href="#">Pages</a>
 				<ul class="sub-menu">
